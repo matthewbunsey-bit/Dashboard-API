@@ -85,7 +85,7 @@ async def root():
 
 @app.get("/dashboard")
 def dashboard():
-    # Real weather for La Porte, TX (coords you requested)
+    # Real weather for La Porte, TX
     api_key = "b160f070fc964b11fcc912ea2a23b440"
     url = f"https://api.openweathermap.org/data/2.5/weather?lat=29.66&lon=-95.04&units=imperial&appid={api_key}"
     
@@ -110,3 +110,7 @@ def dashboard():
         "time": "Live",
         "fact": "Octopuses have three hearts"
     }
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
