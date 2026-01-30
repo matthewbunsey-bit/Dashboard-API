@@ -1,7 +1,6 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 
 app = FastAPI()
 
@@ -24,7 +23,3 @@ def dashboard():
         "time": "Live",
         "fact": "Octopuses have three hearts"
     }
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # use Railway port if set, otherwise 8000
-    uvicorn.run("main:app", host="0.0.0.0", port=port)
