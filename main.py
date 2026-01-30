@@ -6,21 +6,21 @@
   <title>Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    body { background: #0f172a; color: white; font-family: system-ui, sans-serif; }
+    body { background: rgb(15,23,42); color: white; font-family: system-ui, sans-serif; }
     .card { 
-      background: #1e293b;  /* Solid dark slate - no hex that triggers parser */
+      background: rgb(30,41,59); 
       border-radius: 1.5rem; 
       padding: 2rem; 
       box-shadow: 0 15px 30px rgba(0,0,0,0.6); 
       transition: all 0.3s ease; 
-      border: 1px solid #475569; 
+      border: 1px solid rgb(71,85,105); 
     }
     .card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.7); }
     .icon { font-size: 3.5rem; margin-bottom: 1rem; }
     .title { font-size: 1.5rem; font-weight: bold; margin-bottom: 0.75rem; }
     .value { font-size: 3.5rem; font-weight: 700; }
     .sub { font-size: 1.25rem; opacity: 0.8; }
-    .refresh { font-size: 0.9rem; color: #94a3b8; }
+    .refresh { font-size: 0.9rem; color: rgb(148,163,184); }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-8">
