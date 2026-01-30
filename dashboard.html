@@ -10,26 +10,30 @@
     .card { 
       background: #1e293b; 
       border-radius: 1.5rem; 
-      padding: 2rem; 
-      box-shadow: 0 15px 30px rgba(0,0,0,0.6); 
+      padding: 1.5rem; 
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
       transition: all 0.3s; 
       border: 1px solid #475569; 
     }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.7); }
-    .icon { font-size: 3.5rem; margin-bottom: 1rem; }
-    .title { font-size: 1.5rem; font-weight: bold; margin-bottom: 0.75rem; }
-    .value { font-size: 3.5rem; font-weight: 700; }
-    .sub { font-size: 1.25rem; opacity: 0.8; }
-    .refresh { font-size: 0.9rem; color: #94a3b8; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
+    .icon { font-size: 3rem; margin-bottom: 0.75rem; }
+    .title { font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem; }
+    .value { font-size: 2.8rem; font-weight: 700; }
+    .sub { font-size: 1.1rem; opacity: 0.8; }
+    .extra { font-size: 1rem; opacity: 0.9; margin-top: 0.4rem; }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-8">
-  <div class="max-w-6xl w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<body class="min-h-screen flex items-center justify-center p-6">
+  <div class="max-w-6xl w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     <div class="card">
       <div class="icon">🌤️</div>
       <div class="title text-cyan-300">Weather</div>
       <div id="weather" class="value">--</div>
       <div id="weather-desc" class="sub">--</div>
+      <div id="feels_like" class="extra">--</div>
+      <div id="wind" class="extra">--</div>
+      <div id="rain" class="extra">--</div>
+      <div id="sunrise_sunset" class="extra">Sunrise / Sunset: -- / --</div>
     </div>
     <div class="card">
       <div class="icon">📈</div>
@@ -47,17 +51,24 @@
       <div id="fact" class="value text-xl leading-relaxed">--</div>
     </div>
   </div>
-  <div class="fixed bottom-6 right-6 text-right refresh">
+  <div class="fixed bottom-6 right-6 text-right text-sm opacity-80">
     <p>Last updated: <span id="last-update">--</span></p>
-    <p>Auto-refresh every 1s</p>
+    <p>Updates every 1s</p>
   </div>
+
   <script>
     async function updateDashboard() {
       try {
         const res = await fetch('/dashboard');
         const data = await res.json();
+
         document.getElementById("weather").textContent = data.weather || "--";
         document.getElementById("weather-desc").textContent = data["weather-desc"] || "";
+        document.getElementById("feels_like").textContent = data.feels_like || "";
+        document.getElementById("wind").textContent = data.wind || "";
+        document.getElementById("rain").textContent = data.rain || "";
+        document.getElementById("sunrise_sunset").textContent = 
+          `Sunrise / Sunset: ${data.sunrise || "--"} / ${data.sunset || "--"}`;
         document.getElementById("market").textContent = data.market || "--";
         document.getElementById("time").textContent = data.time || "--";
         document.getElementById("fact").textContent = data.fact || "--";
@@ -68,9 +79,8 @@
       }
     }
 
-    // Update every 1 second for exact time
-    updateDashboard();  // initial call
-    setInterval(updateDashboard, 1000);  // 1000 ms = 1 second
+    updateDashboard();
+    setInterval(updateDashboard, 1000);
   </script>
 </body>
 </html>
