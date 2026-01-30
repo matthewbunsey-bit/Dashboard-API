@@ -49,7 +49,7 @@
   </div>
   <div class="fixed bottom-6 right-6 text-right refresh">
     <p>Last updated: <span id="last-update">--</span></p>
-    <p>Auto-refresh every 60s</p>
+    <p>Auto-refresh every 1s</p>
   </div>
   <script>
     async function updateDashboard() {
@@ -67,8 +67,10 @@
         document.getElementById("last-update").textContent = "Fetch error";
       }
     }
-    updateDashboard();
-    setInterval(updateDashboard, 60000);
+
+    // Update every 1 second for exact time
+    updateDashboard();  // initial call
+    setInterval(updateDashboard, 1000);  // 1000 ms = 1 second
   </script>
 </body>
 </html>
