@@ -86,7 +86,7 @@ async def root():
 @app.get("/dashboard")
 def dashboard():
     # Real weather for La Porte, TX (coords you requested)
-    api_key = "PASTE_YOUR_OPENWEATHERMAP_API_KEY_HERE"  # Replace this with your actual key
+    api_key = "b160f070fc964b11fcc912ea2a23b440"
     url = f"https://api.openweathermap.org/data/2.5/weather?lat=29.66&lon=-95.04&units=imperial&appid={api_key}"
     
     try:
@@ -98,14 +98,14 @@ def dashboard():
             temp = response["main"]["temp"]
             desc = response["weather"][0]["description"].title()
             weather_str = f"{temp:.0f}°F {desc}"
-            weather_desc = desc  # Extra for the sub-line if you want it
+            weather_desc = desc
     except:
         weather_str = "Weather error"
         weather_desc = ""
 
     return {
         "weather": weather_str,
-        "weather-desc": weather_desc,  # This populates the smaller text under weather if present
+        "weather-desc": weather_desc,
         "market": "🟩 Bullish (static)",
         "time": "Live",
         "fact": "Octopuses have three hearts"
