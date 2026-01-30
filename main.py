@@ -30,9 +30,9 @@ def dashboard():
     except Exception:
         weather_str = "Weather fetch error"
 
-    # Time - CST
+    # Time in CST
     cst = pytz.timezone("America/Chicago")
-    current_time = datetime.now(cst).strftime("%I:%M %p %Z")
+    current_time = datetime.now(cst).strftime("%I:%M:%S %p %Z")  # added :%S for seconds
 
     return {
         "weather": weather_str,
