@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
+import requests
 
 app = FastAPI()
 
@@ -64,19 +65,16 @@ async def root():
           try {
             const res = await fetch('/dashboard');
             const data = await res.json();
-
             document.getElementById("weather").textContent = data.weather || "--";
             document.getElementById("market").textContent = data.market || "--";
             document.getElementById("time").textContent = data.time || "--";
             document.getElementById("fact").textContent = data.fact || "--";
-
             document.getElementById("last-update").textContent = new Date().toLocaleTimeString();
           } catch (err) {
             console.error(err);
             document.getElementById("last-update").textContent = "Error";
           }
         }
-
         updateDashboard();
         setInterval(updateDashboard, 60000);
       </script>
@@ -87,9 +85,28 @@ async def root():
 
 @app.get("/dashboard")
 def dashboard():
+    # Real weather for La Porte, TX (coords you requested)
+    api_key = "PASTE_YOUR_OPENWEATHERMAP_API_KEY_HERE"  # Replace this with your actual key
+    url = f"https://api.openweathermap.org/data/2.5/weather?lat=29.66&lon=-95.04&units=imperial&appid={api_key}"
+    
+    try:
+        response = requests.get(url).json()
+        if response.get("cod") != 200:
+            weather_str = "Weather fetch failed"
+            weather_desc = ""
+        else:
+            temp = response["main"]["temp"]
+            desc = response["weather"][0]["description"].title()
+            weather_str = f"{temp:.0f}°F {desc}"
+            weather_desc = desc  # Extra for the sub-line if you want it
+    except:
+        weather_str = "Weather error"
+        weather_desc = ""
+
     return {
-        "weather": "72°F Sunny",
-        "market": "🟩 Bullish",
+        "weather": weather_str,
+        "weather-desc": weather_desc,  # This populates the smaller text under weather if present
+        "market": "🟩 Bullish (static)",
         "time": "Live",
         "fact": "Octopuses have three hearts"
     }
