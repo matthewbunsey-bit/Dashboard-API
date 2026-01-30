@@ -8,7 +8,7 @@
   <style>
     body { background: #0f172a; color: white; font-family: system-ui, sans-serif; }
     .card { 
-      background: #1e293b;  /* Changed to solid color - no gradient to avoid syntax error */
+      background: #1e293b;  /* Solid dark slate - no hex that triggers parser */
       border-radius: 1.5rem; 
       padding: 2rem; 
       box-shadow: 0 15px 30px rgba(0,0,0,0.6); 
