@@ -18,7 +18,7 @@ def root():
 @app.get("/dashboard")
 def dashboard():
     return {
-        "weather": "72°F Sunny",
+"weather": "THIS IS THE NEW VERSION MOTHERFUCKER",
         "market": "🟩 Bullish",
         "time": "Live",
         "fact": "Octopuses have three hearts"
